@@ -26,6 +26,7 @@ module Carrierwave
 
       def get_file_extension(description)
         content_type = description.split(';base64').first
+        content_type.slice!('data:')
         mime_type = MIME::Types[content_type].first
         unless mime_type
           raise ArgumentError, "Unknown MIME type: #{content_type}"
